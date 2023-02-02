@@ -15,7 +15,7 @@ function Login() {
 
   return (
     <div className="flex justify-center items-center bg-white">
-      <div className="bg-white w-5/6 lg:w-1/4 rounded-2xl shadow-md border-2 border-darkPink my-20">
+      <div className="bg-white w-5/6 lg:w-1/4 rounded-2xl shadow-md border-2 border-grey my-20">
         <h2 className="text-center text-4xl font-bold mt-4 font-poppins">
           Connexion
         </h2>
@@ -23,11 +23,11 @@ function Login() {
           <input
             required
             className="shadow appearance-none border rounded-full w-full text-white bg-grey py-2 px-3 text-black placeholder-black"
-            id="Email"
+            id="Identifiant"
             name="login"
             value={connexion.login}
             type="text"
-            placeholder="Email"
+            placeholder="Identifiant"
             onChange={(e) => handleConnexion(e.target.name, e.target.value)}
           />
           <input
@@ -50,7 +50,7 @@ function Login() {
           </button>
           <Link
             to="/register"
-            className="hover:underline text-grey font-roboto font-bold mt-2"
+            className="hover:underline text-grey font-roboto font-bold mt-4"
           >
             pas encore inscrit?
           </Link>
