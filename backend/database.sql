@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `biblioMimosa`.`livres` (
   `disponible` BOOLEAN NOT NULL DEFAULT TRUE,
   `connexion_id` INT NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_livre`(`titre`, `connexion_id`),
   CONSTRAINT `fk_livres_connexion` FOREIGN KEY (`connexion_id`) REFERENCES `biblioMimosa`.`connexion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 

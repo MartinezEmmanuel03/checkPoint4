@@ -13,9 +13,10 @@ class ConnexionManager extends AbstractManager {
   }
 
   login(login) {
-    return this.connection.query("select * from connexion where login = ?", [
-      login,
-    ]);
+    return this.connection.query(
+      `select * from ${this.table} where login = ?`,
+      [login]
+    );
   }
 }
 module.exports = ConnexionManager;
