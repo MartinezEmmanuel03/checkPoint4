@@ -13,6 +13,38 @@ CREATE TABLE IF NOT EXISTS `biblioMimosa`.`connexion` (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
+INSERT INTO
+  `connexion`(`login`, `hashedPassword`)
+VALUES
+  (
+    "aoudia-A-06",
+    "$argon2id$v=19$m=65536,t=5,p=1$sj20Lm+kmiLupV2JWfUIvw$YYGSaZTCIts1PzQMUoO5XUO4QRjDzqUjubRj4Ya5Pu0"
+  ),
+  (
+    "lemoine-B-23",
+    "$argon2id$v=19$m=65536,t=5,p=1$/Moi1qkuBZNx65qyH2yUBA$mE5lclcP1sIqNZJZEZs6ozZHdOh/xcPWNcxjbtPlUWw"
+  ),
+  (
+    "petaccia-C-52",
+    "$argon2id$v=19$m=65536,t=5,p=1$FLL5q+TLsug00NENsu8HEw$rZC/6yI1Qie0/+HTN9qTu0QfGXlmrkZHAF/vTVQmcDo"
+  ),
+  (
+    "rouxel-C-45",
+    "$argon2id$v=19$m=65536,t=5,p=1$JODvCFJprCRlftuAJmv+AA$7dx0liPTeHRgTOAbFjY18eUD8W5o8O1ZATZ+oY3+Z8g"
+  ),
+  (
+    "viot-B-36",
+    "$argon2id$v=19$m=65536,t=5,p=1$JODvCFJprCRlftuAJmv+AA$7dx0liPTeHRgTOAbFjY18eUD8W5o8O1ZATZ+oY3+Z8g"
+  ),
+  (
+    "tormo-A-12",
+    "$argon2id$v=19$m=65536,t=5,p=1$JODvCFJprCRlftuAJmv+AA$7dx0liPTeHRgTOAbFjY18eUD8W5o8O1ZATZ+oY3+Z8g"
+  ),
+  (
+    "vaxelaire-A-02",
+    "$argon2id$v=19$m=65536,t=5,p=1$l9ImORgMWzsZX62OfruNcQ$SVeV7nVqKl6yVMIGqaQquAphhn/mhrKdvzLKX+Urd54"
+  );
+
 CREATE TABLE IF NOT EXISTS `biblioMimosa`.`livres` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `titre` VARCHAR(50) NOT NULL,
