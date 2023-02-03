@@ -3,12 +3,16 @@ const express = require("express");
 const router = express.Router();
 
 const connexionControllers = require("./controllers/connexionControllers");
+const livresControllers = require("./controllers/livresControllers");
 const itemControllers = require("./controllers/itemControllers");
 
 const { hashPassword } = require("./services/Auth");
+const checkAuth = require("./middlewares/auth");
 
 router.post("/register", hashPassword, connexionControllers.add);
 router.post("/login", connexionControllers.validateUser);
+
+router.post("/livres", checkAuth, livresControllers.add);
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
