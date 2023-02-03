@@ -1,16 +1,47 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import apiConnexion from "../services/apiConnexion";
+import "react-toastify/dist/ReactToastify.css";
+
+const toastifyConfig = {
+  position: "bottom-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+};
 
 function Login() {
   const [connexion, setConnexion] = useState({
     login: "",
     password: "",
   });
+  const navigate = useNavigate("");
 
   const handleConnexion = (place, value) => {
     const newConnexion = { ...connexion };
     newConnexion[place] = value;
     setConnexion(newConnexion);
+  };
+
+  const sendForm = (e) => {
+    e.preventDefault();
+    apiConnexion
+      .post("/login", connexion)
+      .then(() => {
+        toast.success(`Bonjour cher voisin`, toastifyConfig);
+        setTimeout(() => navigate("/"), 2000);
+      })
+      .catch(() => {
+        toast.error(
+          `Votre identifiant ou votre mot de passe n'est pas valide`,
+          toastifyConfig
+        );
+      });
   };
 
   return (
@@ -19,7 +50,10 @@ function Login() {
         <h2 className="text-center text-4xl font-bold mt-4 font-poppins">
           Connexion
         </h2>
-        <form className="bg-white   px-8 pt-6 pb-8 mb-4">
+        <form
+          className="bg-white   px-8 pt-6 pb-8 mb-4"
+          onSubmit={(e) => sendForm(e)}
+        >
           <input
             required
             className="shadow appearance-none border rounded-full w-full text-white bg-grey py-2 px-3 text-black placeholder-black"
@@ -40,22 +74,35 @@ function Login() {
             placeholder="Mot de passe"
             onChange={(e) => handleConnexion(e.target.name, e.target.value)}
           />
+
+          <div className="mt-4 flex flex-col items-center mb-6">
+            <button
+              type="submit"
+              className="rounded-full font-roboto px-6 py-1 bg-brown text-white border border-brown hover:bg-white hover:text-brown text-xl"
+            >
+              Valider
+            </button>
+            <Link
+              to="/register"
+              className="hover:underline text-grey font-roboto font-bold mt-4"
+            >
+              pas encore inscrit?
+            </Link>
+          </div>
         </form>
-        <div className="mt-4 flex flex-col items-center mb-6">
-          <button
-            type="submit"
-            className="rounded-full font-roboto px-6 py-1 bg-brown text-white border border-brown hover:bg-white hover:text-brown text-xl"
-          >
-            Valider
-          </button>
-          <Link
-            to="/register"
-            className="hover:underline text-grey font-roboto font-bold mt-4"
-          >
-            pas encore inscrit?
-          </Link>
-        </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

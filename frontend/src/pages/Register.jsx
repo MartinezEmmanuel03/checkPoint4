@@ -1,16 +1,60 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import apiConnexion from "@services/apiConnexion";
+import { useNavigate, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
+const toastifyConfig = {
+  position: "bottom-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+};
 
 function Register() {
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [registration, setRegistration] = useState({
     login: "",
     password: "",
   });
+  const navigate = useNavigate("");
 
   const handleRegistration = (place, value) => {
     const newRegistration = { ...registration };
     newRegistration[place] = value;
     setRegistration(newRegistration);
+  };
+
+  const sendForm = (e) => {
+    e.preventDefault();
+    if (registration.password !== confirmPassword) {
+      toast.error(
+        `Les deux mots de passe doivent être identiques`,
+        toastifyConfig
+      );
+    } else {
+      apiConnexion
+        .post("/register", registration)
+        .then(() => {
+          toast.success(
+            `Votre inscription a bien été effectuée`,
+            toastifyConfig
+          );
+          setTimeout(() => navigate("/"), 2000);
+        })
+        .catch((err) => {
+          toast.error(
+            `Veuillez vérifier vos champs, votre inscription n'a pas été validée`,
+            toastifyConfig
+          );
+          console.warn(err);
+        });
+    }
   };
 
   return (
@@ -21,7 +65,7 @@ function Register() {
         </h2>
         <form className="bg-white px-6 pt-6 pb-8 mb-4">
           <input
-            required
+            onSubmit={(e) => sendForm(e)}
             className="shadow text-white appearance-none border rounded-full w-full bg-grey py-2 px-3 text-black placeholder-black"
             id="Identifiant"
             name="login"
@@ -46,23 +90,38 @@ function Register() {
             id="Confirmer mot de passe"
             type="password"
             placeholder="Confirmer mot de passe"
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
+
+          <div className="mt-4 flex flex-col items-center mb-6">
+            <button
+              type="submit"
+              onClick={(e) => sendForm(e)}
+              className="rounded-full px-6 py-1 bg-brown border border-brown font-roboto text-white hover:bg-white hover:text-brown text-xl"
+            >
+              Valider
+            </button>
+            <Link
+              to="/login"
+              className="hover:underline text-grey font-roboto font-bold mt-4"
+            >
+              Déjà inscrit?
+            </Link>
+          </div>
         </form>
-        <div className="mt-4 flex flex-col items-center mb-6">
-          <button
-            type="submit"
-            className="rounded-full px-6 py-1 bg-brown border border-brown font-roboto text-white hover:bg-white hover:text-brown text-xl"
-          >
-            Valider
-          </button>
-          <Link
-            to="/login"
-            className="hover:underline text-grey font-roboto font-bold mt-4"
-          >
-            Déjà inscrit?
-          </Link>
-        </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
