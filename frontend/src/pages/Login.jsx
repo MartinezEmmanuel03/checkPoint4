@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import apiConnexion from "../services/apiConnexion";
+import User from "../contexts/User";
 import "react-toastify/dist/ReactToastify.css";
 
 const toastifyConfig = {
@@ -20,6 +21,7 @@ function Login() {
     login: "",
     password: "",
   });
+  const userContext = useContext(User.UserContext);
   const navigate = useNavigate("");
 
   const handleConnexion = (place, value) => {
@@ -32,7 +34,8 @@ function Login() {
     e.preventDefault();
     apiConnexion
       .post("/login", connexion)
-      .then(() => {
+      .then((data) => {
+        userContext.handleUser(data.data);
         toast.success(`Bonjour cher voisin`, toastifyConfig);
         setTimeout(() => navigate("/"), 2000);
       })

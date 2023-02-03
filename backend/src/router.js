@@ -13,8 +13,11 @@ router.post("/register", hashPassword, connexionControllers.add);
 router.post("/login", connexionControllers.validateUser);
 
 router.post("/livres", checkAuth, livresControllers.add);
-router.get("/connexion/:id/livres", checkAuth, connexionControllers.findLivres);
-router.get("/livres/:id", checkAuth, livresControllers.findByConnexionId);
+router.get(
+  "/livresByConnexionId/:id",
+  checkAuth,
+  livresControllers.findByConnexionId
+);
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);

@@ -1,26 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import apiConnexion from "@services/apiConnexion";
 import PersonnalSpaceLinks from "@components/PersonnalSpaceLinks";
 import "react-toastify/dist/ReactToastify.css";
+import User from "../contexts/User";
+
+const toastifyConfig = {
+  position: "bottom-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+};
 
 function LivresForm() {
+  const { user } = useContext(User.UserContext);
+  const [titreLivres, setTitreLivres] = useState([]);
   const [livre, setLivre] = useState({
     titre: "",
     auteur: "",
     resume: "",
   });
-
-  const toastifyConfig = {
-    position: "bottom-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  };
 
   const handleLivre = (place, value) => {
     const newLivre = { ...livre };
@@ -39,6 +42,19 @@ function LivresForm() {
         console.error(err);
       });
   };
+
+  const getTitreLivres = () => {
+    apiConnexion
+      .get(`/livresByConnexionId/${user.id}`)
+      .then((titres) => {
+        setTitreLivres(titres.data);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    getTitreLivres();
+  }, []);
 
   return (
     <div className="items-center flex flex-col justify-center w-full px-6 bg-white pt-12">
@@ -122,19 +138,35 @@ function LivresForm() {
           </div>
         </form>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 w-full">
         <h1 className="text-center text-3xl font-bold my-4 font-poppins text-grey">
           Ma liste de livres
         </h1>
-        <table className="table-fixed w-full border-collapse mb-10 mt-8">
-          <thead>
-            <tr>
-              <th className="text-start pl-4 text-grey w-3/4">Titre</th>
-              <th className="text-center text-grey w-1/4">Supprimer</th>
-            </tr>
-          </thead>
-          <tbody />
-        </table>
+        <div className="w-full mb-10 mt-8">
+          <div className="flex w-full border-b">
+            <p className="text-start pl-4 text-grey w-3/4">Titre</p>
+            <p className="text-center text-grey w-1/4">Supprimer</p>
+          </div>
+          <div>
+            {titreLivres.length === 0 ? (
+              <h2 className="text-center text-grey mt-8 font-bold font-p">
+                Vous n'avez aucun livre dans votre liste pour le moment
+              </h2>
+            ) : (
+              titreLivres.map((titre) => (
+                <div className="flex w-full mt-2 text-grey hover:bg-grey hover:text-white">
+                  <h3 className="text-start pl-4 w-3/4">{titre.titre}</h3>
+                  <button
+                    type="button"
+                    className="text-center w-1/4 hover:underline"
+                  >
+                    Supprimer
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
       </div>
       <ToastContainer
         position="bottom-right"
