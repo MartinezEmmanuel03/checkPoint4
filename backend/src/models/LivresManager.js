@@ -11,5 +11,12 @@ class LivresManager extends AbstractManager {
       [livre.titre, livre.auteur, livre.resume, true, id]
     );
   }
+
+  findByConnexionId(id) {
+    return this.connection.query(
+      `select titre from  ${this.table} WHERE connexion_id = ?`,
+      [id]
+    );
+  }
 }
 module.exports = LivresManager;

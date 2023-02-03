@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import apiConnexion from "@services/apiConnexion";
 import PersonnalSpaceLinks from "@components/PersonnalSpaceLinks";
+import "react-toastify/dist/ReactToastify.css";
 
 function LivresForm() {
   const [livre, setLivre] = useState({
@@ -8,10 +11,33 @@ function LivresForm() {
     resume: "",
   });
 
+  const toastifyConfig = {
+    position: "bottom-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  };
+
   const handleLivre = (place, value) => {
     const newLivre = { ...livre };
     newLivre[place] = value;
     setLivre(newLivre);
+  };
+
+  const sendLivre = () => {
+    apiConnexion
+      .post("/livres", livre)
+      .then(() => {
+        toast.success(`${livre.titre} a bien été ajouté.`, toastifyConfig);
+      })
+      .catch((err) => {
+        toast.error("Une erreur s'est produite", toastifyConfig);
+        console.error(err);
+      });
   };
 
   return (
@@ -74,6 +100,7 @@ function LivresForm() {
             />
             <button
               type="button"
+              onClick={() => sendLivre()}
               className="
                   w-40
                   bg-brown
@@ -109,6 +136,18 @@ function LivresForm() {
           <tbody />
         </table>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
