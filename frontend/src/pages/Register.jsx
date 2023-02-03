@@ -97,7 +97,7 @@ function Register() {
             <button
               type="submit"
               onClick={(e) => sendForm(e)}
-              className="rounded-full px-6 py-1 bg-brown border border-brown font-roboto text-white hover:bg-white hover:text-brown text-xl"
+              className="rounded-full px-6 py-1 bg-brown border border-brown font-roboto text-white hover:bg-white hover:text-brown transition-colors duration-300 text-xl"
             >
               Valider
             </button>

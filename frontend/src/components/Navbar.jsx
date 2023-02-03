@@ -11,7 +11,7 @@ function Navbar() {
       <Link
         to="/login"
         type="button"
-        className="rounded-2xl bg-brown text-white p-2 mr-4"
+        className="rounded-2xl bg-brown border border-brown text-white hover:text-brown hover:bg-white transition-colors duration-300 p-2 mr-4"
       >
         Connexion
       </Link>
