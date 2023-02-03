@@ -13,7 +13,7 @@ export default function Home() {
       </p>
       <button
         type="button"
-        className="bg-brown text-white font-roboto border md:text-2xl md:p-4 md:rounded-3xl border-brown hover:bg-white hover:text-brown rounded-2xl p-2 mt-16 mb-16"
+        className="bg-brown text-white font-roboto border md:text-2xl md:p-4 md:rounded-3xl border-brown hover:bg-white hover:text-brown transition-colors duration-300 rounded-2xl p-2 mt-16 mb-16"
       >
         Voir livres disponibles
       </button>

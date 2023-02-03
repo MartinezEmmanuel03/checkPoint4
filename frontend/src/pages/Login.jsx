@@ -78,7 +78,7 @@ function Login() {
           <div className="mt-4 flex flex-col items-center mb-6">
             <button
               type="submit"
-              className="rounded-full font-roboto px-6 py-1 bg-brown text-white border border-brown hover:bg-white hover:text-brown text-xl"
+              className="rounded-full font-roboto px-6 py-1 bg-brown text-white border border-brown hover:bg-white hover:text-brown transition-colors duration-300 text-xl"
             >
               Valider
             </button>
