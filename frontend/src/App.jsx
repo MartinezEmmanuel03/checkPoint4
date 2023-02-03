@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Public from "@pages/layouts/Public";
 import Register from "@pages/Register";
 import Login from "@pages/Login";
+import LivresForm from "@pages/LivresForm";
 import Home from "./pages/Home";
 
 import "./App.css";
@@ -16,6 +17,7 @@ function App() {
           <Route path="" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="livresForm" element={<LivresForm />} />
         </Route>
       </Routes>
     </Router>
