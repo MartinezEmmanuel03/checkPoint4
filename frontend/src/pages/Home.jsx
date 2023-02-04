@@ -1,8 +1,22 @@
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import User from "../contexts/User";
 import image from "../assets/livres.png";
 
 export default function Home() {
+  const { user } = useContext(User.UserContext);
   return (
     <div className="bg-white flex flex-col items-center">
+      {user && (
+        <div className="flex justify-end mt-2">
+          <Link
+            to="/livresForm"
+            className="rounded-2xl bg-brown border border-brown text-white hover:text-brown hover:bg-white transition-colors duration-300 p-2"
+          >
+            Espace personnel
+          </Link>
+        </div>
+      )}
       <h1 className="text-grey md:text-5xl text-4xl font-extrabold text-center pt-20 font-poppins mb-6">
         BIBLIO-MIMOSA
       </h1>

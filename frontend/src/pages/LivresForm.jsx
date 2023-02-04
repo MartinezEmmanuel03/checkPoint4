@@ -150,7 +150,7 @@ function LivresForm() {
           <div>
             {titreLivres.length === 0 ? (
               <h2 className="text-center text-grey mt-8 font-bold font-p">
-                Vous n'avez aucun livre dans votre liste pour le moment
+                Il n'y a aucun livre dans votre liste pour le moment
               </h2>
             ) : (
               titreLivres.map((titre) => (
