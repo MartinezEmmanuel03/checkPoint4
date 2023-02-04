@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Public from "@pages/layouts/Public";
+import Private from "@pages/layouts/Private";
 import Register from "@pages/Register";
 import Login from "@pages/Login";
 import LivresForm from "@pages/LivresForm";
@@ -18,6 +19,8 @@ function App() {
           <Route path="" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+        </Route>
+        <Route path="/" element={<Private />}>
           <Route path="livresForm" element={<LivresForm />} />
           <Route path="prets" element={<Prets />} />
         </Route>
