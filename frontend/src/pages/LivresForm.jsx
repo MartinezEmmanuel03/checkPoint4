@@ -154,7 +154,7 @@ function LivresForm() {
               </h2>
             ) : (
               titreLivres.map((titre) => (
-                <div className="flex w-full mt-2 text-grey hover:bg-grey hover:text-white">
+                <div className="flex w-full mt-2 text-grey hover:bg-grey hover:text-white transition-colors duration-300">
                   <h3 className="text-start pl-4 w-3/4">{titre.titre}</h3>
                   <button
                     type="button"
