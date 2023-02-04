@@ -25,12 +25,12 @@ export default function Home() {
         Partagez votre goût de la lecture avec vos voisins de la résidence des
         mimosas
       </p>
-      <button
-        type="button"
+      <Link
+        to="/livres"
         className="bg-brown text-white font-roboto border md:text-2xl md:p-4 md:rounded-3xl border-brown hover:bg-white hover:text-brown transition-colors duration-300 rounded-2xl p-2 mt-16 mb-16"
       >
         Voir livres disponibles
-      </button>
+      </Link>
     </div>
   );
 }
