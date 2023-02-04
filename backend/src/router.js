@@ -18,6 +18,7 @@ router.get(
   checkAuth,
   livresControllers.findByConnexionId
 );
+router.delete("/livres/:id", checkAuth, livresControllers.destroy);
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);

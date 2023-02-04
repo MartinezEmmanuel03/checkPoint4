@@ -31,18 +31,6 @@ function LivresForm() {
     setLivre(newLivre);
   };
 
-  const sendLivre = () => {
-    apiConnexion
-      .post("/livres", livre)
-      .then(() => {
-        toast.success(`${livre.titre} a bien été ajouté.`, toastifyConfig);
-      })
-      .catch((err) => {
-        toast.error("Une erreur s'est produite", toastifyConfig);
-        console.error(err);
-      });
-  };
-
   const getTitreLivres = () => {
     apiConnexion
       .get(`/livresByConnexionId/${user.id}`)
@@ -55,6 +43,32 @@ function LivresForm() {
   useEffect(() => {
     getTitreLivres();
   }, []);
+
+  const sendLivre = () => {
+    apiConnexion
+      .post("/livres", livre)
+      .then(() => {
+        toast.success(`${livre.titre} a bien été ajouté.`, toastifyConfig);
+        getTitreLivres();
+      })
+      .catch((err) => {
+        toast.error("Une erreur s'est produite", toastifyConfig);
+        console.error(err);
+      });
+  };
+
+  const deleteLivre = (id) => {
+    apiConnexion
+      .delete(`livres/${id}`)
+      .then(() => {
+        toast.success("Votre livre a bien été supprimé", toastifyConfig);
+        getTitreLivres();
+      })
+      .catch((err) => {
+        toast.error("Une erreur s'est produite", toastifyConfig);
+        console.error(err);
+      });
+  };
 
   return (
     <div className="items-center flex flex-col justify-center w-full px-6 bg-white pt-12">
@@ -158,6 +172,7 @@ function LivresForm() {
                   <h3 className="text-start pl-4 w-3/4">{titre.titre}</h3>
                   <button
                     type="button"
+                    onClick={() => deleteLivre(titre.id)}
                     className="text-center w-1/4 hover:underline"
                   >
                     Supprimer

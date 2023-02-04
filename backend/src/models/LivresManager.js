@@ -14,7 +14,7 @@ class LivresManager extends AbstractManager {
 
   findByConnexionId(id) {
     return this.connection.query(
-      `select titre from  ${this.table} WHERE connexion_id = ?`,
+      `select id, titre from  ${this.table} WHERE connexion_id = ?`,
       [id]
     );
   }
