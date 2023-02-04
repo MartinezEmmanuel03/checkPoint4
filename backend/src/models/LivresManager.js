@@ -18,5 +18,19 @@ class LivresManager extends AbstractManager {
       [id]
     );
   }
+
+  findList() {
+    return this.connection.query(
+      `select id, titre, auteur FROM ${this.table} WHERE disponible = ?`,
+      [1]
+    );
+  }
+
+  find(id) {
+    return this.connection.query(
+      `select id, titre, auteur, resume from  ${this.table} where id = ?`,
+      [id]
+    );
+  }
 }
 module.exports = LivresManager;
