@@ -18,12 +18,32 @@ const toastifyConfig = {
 function Prets() {
   const [listeLivresPretes, setListeLivresPretes] = useState([]);
 
+  const changeDisponible = (id) => {
+    const query = { disponible: 1 };
+    apiConnexion.put(`/livres/${id}`, query).catch(() => {
+      toast.error(`Une erreur est survenue`, toastifyConfig);
+    });
+  };
+
+  const confirmLivreRendu = (id) => {
+    apiConnexion
+      .put(`/emprunts/${id}`)
+      .then(
+        toast.success(
+          "Le retour de votre livre a bien été enregistré",
+          toastifyConfig
+        )
+      )
+      .catch(() => {
+        toast.error(`Une erreur est survenue`, toastifyConfig);
+      });
+  };
+
   const getListeLivresPretes = () => {
     apiConnexion
       .get(`/emprunts`)
       .then((liste) => {
         setListeLivresPretes(liste.data);
-        toast("hello", toastifyConfig);
       })
       .catch((error) => console.error(error));
   };
@@ -31,6 +51,11 @@ function Prets() {
   useEffect(() => {
     getListeLivresPretes();
   }, []);
+
+  const rendreLivre = (id) => {
+    changeDisponible(id);
+    confirmLivreRendu(id);
+  };
 
   return (
     <div className="items-center flex flex-col justify-center w-full bg-white pt-12">
@@ -57,6 +82,7 @@ function Prets() {
               <p className="text-center text-grey w-2/5 pb-6">{livre.titre}</p>
               <button
                 type="button"
+                onClick={() => rendreLivre(livre.id)}
                 className="text-center text-grey w-1/5 pb-6"
               >
                 Rendu
