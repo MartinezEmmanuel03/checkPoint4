@@ -7,7 +7,7 @@ class EmpruntsManager extends AbstractManager {
 
   insert(emprunt) {
     return this.connection.query(
-      `insert into ${this.table} (livres_id, connexion_id, dateEmprunt) values (?, ?, ?)`,
+      `INSERT INTO ${this.table} (livres_id, connexion_id, dateEmprunt) VALUES (?, ?, ?)`,
       [emprunt.livres_id, emprunt.connexion_id, emprunt.dateEmprunt]
     );
   }

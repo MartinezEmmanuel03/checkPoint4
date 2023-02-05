@@ -57,6 +57,34 @@ CREATE TABLE IF NOT EXISTS `biblioMimosa`.`livres` (
   CONSTRAINT `fk_livres_connexion` FOREIGN KEY (`connexion_id`) REFERENCES `biblioMimosa`.`connexion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
+INSERT INTO
+  `livres`(`titre`, `auteur`, `resume`, `connexion_id`)
+VALUES
+  (
+    "La merditude des choses",
+    "Felix Van Groeningen",
+    "Gunther Strobbe a 13 ans et une vie compliquée. Le jeune garçon partage le toit de sa grand-mère avec son père et ses trois oncles.",
+    2
+  ),
+  (
+    "Conar le barbant",
+    "Robert E.Howard",
+    "Tour à tour esclave, mercenaire et roi, Conar n'a qu'un seul précepte: 'ya des jours où faut pas me faire chier. Et ya des jours tous les jours.'",
+    2
+  ),
+  (
+    "Guerres et pets",
+    "William Saurin",
+    "Un savant mélange de Guerre et paix et d'Autant en emporte le vent.",
+    2
+  ),
+  (
+    "CSS 117, React ne répond plus",
+    "Michel Buganavicius",
+    "23 ans après le bug de l'an 2000, CSS 117 est de retour pour une nouvelle mission à l'autre bout du monde.",
+    2
+  );
+
 CREATE TABLE IF NOT EXISTS `biblioMimosa`.`emprunts` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `livres_id` INT NOT NULL,

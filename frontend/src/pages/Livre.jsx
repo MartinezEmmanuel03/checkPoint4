@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import apiConnexion from "../services/apiConnexion";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,6 +20,7 @@ function Livre() {
   const { user } = useContext(User.UserContext);
   const { id } = useParams();
   const [livre, setLivre] = useState({});
+  const navigate = useNavigate("");
 
   const getLivre = () => {
     apiConnexion
@@ -34,9 +35,46 @@ function Livre() {
     getLivre();
   }, []);
 
+  const changeDisponible = () => {
+    const query = { disponible: 0 };
+    apiConnexion
+      .put(`/livres/${livre.id}`, query)
+      .then(() => {
+        getLivre();
+      })
+      .catch(() => {
+        toast.error(`Une erreur est survenue`, toastifyConfig);
+      });
+  };
+
+  const postEmprunt = () => {
+    const query = { livres_id: livre.id };
+    apiConnexion
+      .post(`/emprunts`, query)
+      .then(
+        toast.success(
+          "Vous avez bien emprunté ce livre, n'oubliez pas d'aller le chercher",
+          toastifyConfig
+        )
+      )
+      .catch(() => {
+        toast.error(`Une erreur est survenue`, toastifyConfig);
+      });
+  };
+
   const createEmprunt = () => {
     if (!user) {
       toast.warn("Connectez vous pour emprunter ce livre", toastifyConfig);
+    } else if (livre.disponible === 0) {
+      toast.warn(
+        "Ce livre est déjà prêté, Choisissez en un autre",
+        toastifyConfig
+      );
+      setTimeout(() => navigate("/livres"), 2000);
+    } else {
+      changeDisponible();
+      postEmprunt();
+      setTimeout(() => navigate("/livres"), 2000);
     }
   };
 
