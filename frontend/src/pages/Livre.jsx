@@ -74,7 +74,7 @@ function Livre() {
     } else {
       changeDisponible();
       postEmprunt();
-      setTimeout(() => navigate("/livres"), 2000);
+      setTimeout(() => navigate("/livres"), 3000);
     }
   };
 
