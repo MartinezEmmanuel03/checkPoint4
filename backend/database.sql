@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `biblioMimosa`.`emprunts` (
   `connexion_id` INT NOT NULL,
   `dateEmprunt` date,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_emprunt`(`livres_id`, `connexion_id`),
   CONSTRAINT `fk_emprunts_connexion` FOREIGN KEY (`connexion_id`) REFERENCES `biblioMimosa`.`connexion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_emprunts_livres` FOREIGN KEY (`livres_id`) REFERENCES `biblioMimosa`.`livres` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
