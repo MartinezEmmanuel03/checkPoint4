@@ -55,6 +55,7 @@ function Prets() {
   const rendreLivre = (id) => {
     changeDisponible(id);
     confirmLivreRendu(id);
+    setTimeout(() => getListeLivresPretes(), 1000);
   };
 
   return (
