@@ -28,7 +28,7 @@ class LivresManager extends AbstractManager {
 
   find(id) {
     return this.connection.query(
-      `select id, titre, auteur, resume from  ${this.table} where id = ?`,
+      `select id, titre, auteur, resume, disponible from  ${this.table} where id = ?`,
       [id]
     );
   }

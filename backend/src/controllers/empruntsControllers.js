@@ -15,12 +15,13 @@ const dateInscript = () => {
 
 const add = (req, res) => {
   const emprunt = req.body;
+  emprunt.connexion_id = req.auth.id;
   emprunt.dateEmprunt = dateInscript();
 
   models.emprunts
     .insert(emprunt)
     .then(([result]) => {
-      res.location(`/emprunt/${result.insertId}`).sendStatus(201);
+      res.location(`/emprunts/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
