@@ -75,10 +75,30 @@ const read = (req, res) => {
     });
 };
 
+const edit = (req, res) => {
+  const livre = req.body;
+  const id = parseInt(req.params.id, 10);
+
+  models.livres
+    .update(livre, id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   add,
   findByConnexionId,
   destroy,
   browse,
   read,
+  edit,
 };

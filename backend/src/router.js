@@ -21,6 +21,7 @@ router.get(
 router.delete("/livres/:id", checkAuth, livresControllers.destroy);
 router.get("/livres", livresControllers.browse);
 router.get("/livres/:id", livresControllers.read);
+router.put("/livres/:id", checkAuth, livresControllers.edit);
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);

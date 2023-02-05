@@ -25,11 +25,11 @@ function Livres() {
       </h1>
       <div className="flex w-11/12 mx-auto border-b mt-12">
         <p className="text-center text-grey w-2/4 mr-8">Titre</p>
-        <p className="text-center text-grey w-2/4">Auteur</p>
+        <p className="text-center text-grey w-2/4">Propriétaire</p>
       </div>
       <div className="my-12">
         {listLivres.length === 0 ? (
-          <h2 className="text-center text-grey mt-8 font-bold font-p">
+          <h2 className="text-center text-grey mt-8 font-bold font-p mb-44">
             Il n'y a aucun livre disponible pour le moment
           </h2>
         ) : (
@@ -41,7 +41,7 @@ function Livres() {
               >
                 {livre.titre}
               </Link>
-              <p className="text-center w-2/4">{livre.auteur}</p>
+              <p className="text-center w-2/4">{livre.login}</p>
             </div>
           ))
         )}

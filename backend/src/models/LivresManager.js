@@ -21,7 +21,7 @@ class LivresManager extends AbstractManager {
 
   findList() {
     return this.connection.query(
-      `select id, titre, auteur FROM ${this.table} WHERE disponible = ?`,
+      `select l.id, l.titre, c.login FROM ${this.table} AS l INNER JOIN connexion AS c ON c.id = l.connexion_id  WHERE disponible = ? ORDER BY c.login ASC, l.titre ASC`,
       [1]
     );
   }
@@ -31,6 +31,13 @@ class LivresManager extends AbstractManager {
       `select id, titre, auteur, resume from  ${this.table} where id = ?`,
       [id]
     );
+  }
+
+  update(livre, id) {
+    return this.connection.query(`update ${this.table} set ? where id = ?`, [
+      livre,
+      id,
+    ]);
   }
 }
 module.exports = LivresManager;
