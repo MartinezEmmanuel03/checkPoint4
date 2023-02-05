@@ -29,6 +29,19 @@ const add = (req, res) => {
     });
 };
 
+const browse = (req, res) => {
+  models.emprunts
+    .findAllEmprunts(req.auth.id)
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   add,
+  browse,
 };
