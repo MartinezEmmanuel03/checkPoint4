@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `biblioMimosa`.`emprunts` (
   `livres_id` INT NOT NULL,
   `connexion_id` INT NOT NULL,
   `dateEmprunt` date,
+  `rendu` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_emprunt`(`livres_id`, `connexion_id`),
   CONSTRAINT `fk_emprunts_connexion` FOREIGN KEY (`connexion_id`) REFERENCES `biblioMimosa`.`connexion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
