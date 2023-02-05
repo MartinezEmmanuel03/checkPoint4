@@ -26,6 +26,7 @@ router.put("/livres/:id", checkAuth, livresControllers.edit);
 
 router.post("/emprunts", checkAuth, empruntsControllers.add);
 router.get("/emprunts", checkAuth, empruntsControllers.browse);
+router.put("/emprunts/:id", checkAuth, empruntsControllers.edit);
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
