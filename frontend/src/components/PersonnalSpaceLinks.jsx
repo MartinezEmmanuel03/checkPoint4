@@ -36,6 +36,22 @@ const personnalSpaceLinks = () => {
       >
         Mes prêts
       </Link>
+      <Link
+        to="/emprunts"
+        className=" transition duration-300
+                  hover:bg-white
+                  bg-brown
+                  hover:text-brown
+                  text-white
+                  border
+                  border-brown
+                  font-bold
+                  font-roboto
+                  py-2 px-4
+                  rounded-2xl"
+      >
+        Mes emprunts
+      </Link>
     </div>
   );
 };

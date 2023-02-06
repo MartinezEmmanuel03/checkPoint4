@@ -60,8 +60,21 @@ const edit = (req, res) => {
     });
 };
 
+const browseLivresEmpruntes = (req, res) => {
+  models.emprunts
+    .findEmprunts(req.auth.id)
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   add,
   browse,
   edit,
+  browseLivresEmpruntes,
 };

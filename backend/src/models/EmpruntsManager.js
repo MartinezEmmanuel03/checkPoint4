@@ -28,6 +28,16 @@ class EmpruntsManager extends AbstractManager {
       [1, emprunt.id]
     );
   }
+
+  findEmprunts(id) {
+    return this.connection.query(
+      `select c.login, l.titre, e.dateEmprunt from  ${this.table} AS e
+      INNER JOIN livres AS l ON l.id = e.livres_id
+      INNER JOIN connexion AS c ON c.id = l.connexion_id
+      WHERE e.connexion_id = ? AND e.rendu = ? ORDER BY e.dateEmprunt ASC`,
+      [id, 0]
+    );
+  }
 }
 
 module.exports = EmpruntsManager;

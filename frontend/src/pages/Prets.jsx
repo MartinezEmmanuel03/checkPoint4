@@ -74,8 +74,8 @@ function Prets() {
           </div>
         </div>
         {listeLivresPretes.length === 0 ? (
-          <h2 className="text-center text-2xl font-bold my-4 font-poppins text-grey">
-            Vous n'avez pas de livres empruntés pour le moment
+          <h2 className="text-center text-2xl font-bold my-4 font-poppins text-grey px-2">
+            Vous n'avez pas prêté de livres pour le moment
           </h2>
         ) : (
           listeLivresPretes.map((livre) => (
