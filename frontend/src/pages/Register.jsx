@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import apiConnexion from "@services/apiConnexion";
 import { useNavigate, Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import favicon from "../../public/favicon.png";
 
 const toastifyConfig = {
   position: "bottom-right",
@@ -59,6 +61,15 @@ function Register() {
 
   return (
     <div className="flex justify-center items-center bg-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Inscription</title>
+        <meta
+          name="description"
+          content="Page d'inscription du site BIBLIO-MIMOSA"
+        />
+        <link rel="icon" type="image/png" href={favicon} />
+      </Helmet>
       <div className=" w-5/6 lg:w-1/4 rounded-2xl shadow-md border-2 border-grey my-20">
         <h2 className="text-center text-4xl font-bold mt-4 font-poppins">
           Inscription

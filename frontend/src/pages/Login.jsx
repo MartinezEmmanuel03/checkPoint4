@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 import apiConnexion from "../services/apiConnexion";
 import User from "../contexts/User";
 import "react-toastify/dist/ReactToastify.css";
+import favicon from "../../public/favicon.png";
 
 const toastifyConfig = {
   position: "bottom-right",
@@ -49,6 +51,15 @@ function Login() {
 
   return (
     <div className="flex justify-center items-center bg-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Connexion</title>
+        <meta
+          name="description"
+          content="Page de connexion du site BIBLIO-MIMOSA"
+        />
+        <link rel="icon" type="image/png" href={favicon} />
+      </Helmet>
       <div className="bg-white w-5/6 lg:w-1/4 rounded-2xl shadow-md border-2 border-grey my-20">
         <h2 className="text-center text-4xl font-bold mt-4 font-poppins">
           Connexion

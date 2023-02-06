@@ -1,12 +1,23 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import User from "../contexts/User";
 import image from "../assets/livres.png";
+import favicon from "../../public/favicon.png";
 
 export default function Home() {
   const { user } = useContext(User.UserContext);
   return (
     <div className="bg-white flex flex-col items-center">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Accueil</title>
+        <meta
+          name="description"
+          content="Page d'accueil du site BIBLIO-MIMOSA"
+        />
+        <link rel="icon" type="image/png" href={favicon} />
+      </Helmet>
       {user && (
         <div className="flex justify-end mt-2">
           <Link
