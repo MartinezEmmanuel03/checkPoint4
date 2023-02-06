@@ -67,9 +67,10 @@ function Prets() {
         </h1>
         <div className="w-full mb-12 mt-10 min-h-0">
           <div className="border-b flex">
-            <p className="text-center text-grey w-2/5 pb-6">Emprunteur</p>
-            <p className="text-center text-grey w-2/5 pb-6">Livre</p>
-            <p className="text-center text-grey w-1/5 pb-6">Retour</p>
+            <p className="text-center text-grey w-2/6 pb-6">Emprunteur</p>
+            <p className="text-center text-grey w-2/6 pb-6">Livre</p>
+            <p className="text-center text-grey w-1/6 pb-6">Date de prêt</p>
+            <p className="text-center text-grey w-1/6 pb-6">Retour</p>
           </div>
         </div>
         {listeLivresPretes.length === 0 ? (
@@ -78,13 +79,16 @@ function Prets() {
           </h2>
         ) : (
           listeLivresPretes.map((livre) => (
-            <div className="flex">
+            <div className="flex text-sm">
               <p className="text-center text-grey w-2/5 pb-6">{livre.login}</p>
               <p className="text-center text-grey w-2/5 pb-6">{livre.titre}</p>
+              <p className="text-center text-grey w-1/5 pb-6">
+                {livre.dateEmprunt.split("T").shift()}
+              </p>
               <button
                 type="button"
                 onClick={() => rendreLivre(livre.id)}
-                className="text-center text-grey w-1/5 pb-6"
+                className="text-center text-grey w-1/5 pb-6 self-start hover:underline"
               >
                 Rendu
               </button>
