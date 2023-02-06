@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import apiConnexion from "../services/apiConnexion";
+import favicon from "../../public/favicon.png";
 
 function Livres() {
   const [listLivres, setListLivres] = useState([]);
@@ -20,6 +22,15 @@ function Livres() {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Livres</title>
+        <meta
+          name="description"
+          content="Liste des livres disponibles à l'emprunt sur le site BIBLIO-MIMOSA"
+        />
+        <link rel="icon" type="image/png" href={favicon} />
+      </Helmet>
       <h1 className="text-grey md:text-5xl text-4xl font-extrabold text-center pt-20 font-poppins mb-6">
         Livres
       </h1>

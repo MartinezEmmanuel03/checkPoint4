@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 import apiConnexion from "../services/apiConnexion";
 import "react-toastify/dist/ReactToastify.css";
 import User from "../contexts/User";
+import favicon from "../../public/favicon.png";
 
 const toastifyConfig = {
   position: "bottom-right",
@@ -80,6 +82,15 @@ function Livre() {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Livre</title>
+        <meta
+          name="description"
+          content="Détail d'un livre disponible à l'emprunt sur le site BIBLIO-MIMOSA"
+        />
+        <link rel="icon" type="image/png" href={favicon} />
+      </Helmet>
       <div className="mt-3 ml-2">
         <Link
           to="/livres"
