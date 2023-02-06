@@ -1,0 +1,80 @@
+const models = require("../models");
+
+const dateInscript = () => {
+  const year = new Date().getFullYear();
+  let month = new Date().getMonth() + 1;
+  let date = new Date().getDate();
+  if (month < 10) {
+    month = `0${month}`;
+  }
+  if (date < 10) {
+    date = `0${date}`;
+  }
+  return `${year}-${month}-${date}`;
+};
+
+const add = (req, res) => {
+  const emprunt = req.body;
+  emprunt.connexion_id = req.auth.id;
+  emprunt.dateEmprunt = dateInscript();
+
+  models.emprunts
+    .insert(emprunt)
+    .then(([result]) => {
+      res.location(`/emprunts/${result.insertId}`).sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const browse = (req, res) => {
+  models.emprunts
+    .findAllEmprunts(req.auth.id)
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const edit = (req, res) => {
+  const emprunt = req.body;
+  emprunt.id = parseInt(req.params.id, 10);
+
+  models.emprunts
+    .update(emprunt)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const browseLivresEmpruntes = (req, res) => {
+  models.emprunts
+    .findEmprunts(req.auth.id)
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+module.exports = {
+  add,
+  browse,
+  edit,
+  browseLivresEmpruntes,
+};
