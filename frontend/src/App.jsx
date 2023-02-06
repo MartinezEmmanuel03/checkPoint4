@@ -9,6 +9,7 @@ import LivresForm from "@pages/LivresForm";
 import Prets from "@pages/Prets";
 import Livres from "@pages/Livres";
 import Livre from "@pages/Livre";
+import Emprunts from "@pages/Emprunts";
 import Home from "./pages/Home";
 
 import "./App.css";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={<Private />}>
           <Route path="livresForm" element={<LivresForm />} />
           <Route path="prets" element={<Prets />} />
+          <Route path="emprunts" element={<Emprunts />} />
         </Route>
       </Routes>
     </Router>
